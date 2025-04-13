@@ -10,20 +10,20 @@ const userScheama = new mongoose.Schema({
         required: true,
         maxlength: 50
     },
-    username: {
+    userName: {
         type: String,
         required: true,
         unique: true,
         maxlength: 30
     },
     age:{
-        tyepe: Number,
+        type: Number,
         required: true,
         min: 18,
     },
     bio: {
         type: String,
-        required: true,
+        
         default: "Hello, I'm new here!",
         maxlength: 50
     },
@@ -55,6 +55,10 @@ const userScheama = new mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+    date:{
+        type:Date,
+        default:Date.now
     }
 }, { timestamps: true });
 
