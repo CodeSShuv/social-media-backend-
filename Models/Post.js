@@ -5,7 +5,7 @@ const postSchema = new mongoose.Schema({
         ref: 'User',
         required: true
     },
-    desc: {
+    content: {
         type: String,
         required: true,
         maxlength: 500
@@ -17,7 +17,12 @@ const postSchema = new mongoose.Schema({
     likes: {
         type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
         default: []
+    },
+    comment:{
+        type:[{type:mongoose.Schema.Types.ObjectId, ref: 'User'}],
+        default: []
     }
+   
 }, { timestamps: true });
 const Post = mongoose.model("Post", postSchema);
 module.exports = Post;

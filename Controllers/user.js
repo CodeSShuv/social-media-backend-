@@ -6,7 +6,7 @@ const {createAToken} = require("../services/auth.js")
 ///handler for creating the user .
 const handelUserRegister  = async  (req, res) => {
     const {firstName, lastName , age , email , userName, gender, password} = req.body;
-
+    console.log(req.body);
     const  hashedPassword = await generateHash(password);
 
     const newUser = new User({
@@ -14,7 +14,7 @@ const handelUserRegister  = async  (req, res) => {
         lastName:lastName,
         age:age,
         email:email,
-        userName: userName,
+        userName: userName,   
         gender:gender,
         password:hashedPassword
     });
@@ -40,15 +40,15 @@ const handleUserLogin = async (req,res) =>{
         let result = await compareHash(password, user.password);
         if(result ){
            const token  =  createAToken({
+                userId:user.id,
                 userName:user.userName,
                 firstName:user.firstName,
                 lastName:user.lastName,
                 age:user.age,
                 email:user.email,
             });
-            res.status(200).cookie("token", token, {
-              
-            }).json({
+            res.status(200).cookie("token", token).json({
+                userId:user.id,
                 userName:user.userName,
                 firstName:user.firstName,
                 lastName:user.lastName,
